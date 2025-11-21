@@ -62,34 +62,37 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Campaign Analytics Dashboard
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <header className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            Campaign Dashboard
           </h1>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-3 text-gray-600 text-lg">
             Monitor and analyze your campaign performance
           </p>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {isLoading && (
-          <div className="flex justify-center items-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-            <span className="ml-3 text-lg text-gray-700">
+          <div className="flex justify-center items-center py-20">
+            <div className="relative">
+              <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-200"></div>
+              <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-600 absolute top-0"></div>
+            </div>
+            <span className="ml-4 text-xl text-gray-700 font-medium">
               Loading campaigns...
             </span>
           </div>
         )}
 
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+          <div className="bg-red-50 border-l-4 border-red-500 rounded-r-xl p-6 mb-8 shadow-md">
             <div className="flex">
               <div className="flex-shrink-0">
                 <svg
-                  className="h-5 w-5 text-red-400"
+                  className="h-6 w-6 text-red-500"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -101,7 +104,7 @@ export default function DashboardPage() {
                 </svg>
               </div>
               <div className="ml-3">
-                <h3 className="text-sm font-medium text-red-800">
+                <h3 className="text-base font-semibold text-red-800">
                   Error loading campaigns
                 </h3>
                 <div className="mt-2 text-sm text-red-700">
@@ -113,40 +116,22 @@ export default function DashboardPage() {
         )}
 
         {!isLoading && !error && (
-          <>
-            <FilterDropdown
-              currentFilter={currentFilter}
-              onFilterChange={handleFilterChange}
-            />
-
-            <CampaignTable campaigns={filteredCampaigns} />
-
-            <div className="mt-6 bg-white rounded-lg shadow p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-2">
-                Summary
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <p className="text-sm text-gray-600">Total Campaigns</p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {campaigns.length}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600">Filtered Results</p>
-                  <p className="text-2xl font-bold text-blue-600">
-                    {filteredCampaigns.length}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600">Active Campaigns</p>
-                  <p className="text-2xl font-bold text-green-600">
-                    {campaigns.filter((c) => c.status === "Active").length}
-                  </p>
-                </div>
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+            <div className="bg-gradient-to-r from-blue-500 to-indigo-600 px-8 py-6">
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <h2 className="text-2xl font-bold text-white">
+                  Campaign Overview
+                </h2>
+                <FilterDropdown
+                  currentFilter={currentFilter}
+                  onFilterChange={handleFilterChange}
+                />
               </div>
             </div>
-          </>
+            <div className="p-8">
+              <CampaignTable campaigns={filteredCampaigns} />
+            </div>
+          </div>
         )}
       </main>
     </div>
