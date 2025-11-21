@@ -14,8 +14,8 @@ class CampaignBase(BaseModel):
     status: str = Field(
         ...,
         description="Current status of the campaign",
-        pattern="^(active|paused|completed)$",
-        example="active"
+        pattern="^(Active|Paused|Completed)$",
+        example="Active"
     )
     
     clicks: int = Field(

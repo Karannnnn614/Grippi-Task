@@ -18,7 +18,7 @@ class Campaign(Base):
     status = Column(
         String(50),
         nullable=False,
-        default="active",
+        default="Active",
     )
     clicks = Column(
         Integer,
