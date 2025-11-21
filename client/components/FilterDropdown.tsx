@@ -10,7 +10,12 @@ export default function FilterDropdown({
   currentFilter,
   onFilterChange,
 }: FilterDropdownProps) {
-  const filterOptions: CampaignFilter[] = ["All", "Active", "Paused"];
+  const filterOptions: CampaignFilter[] = [
+    "All",
+    "Active",
+    "Paused",
+    "Completed",
+  ];
 
   return (
     <div className="flex items-center gap-3">
