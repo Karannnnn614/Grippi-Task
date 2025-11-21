@@ -65,7 +65,6 @@ def create_campaign(campaign: schemas.CampaignCreate, db: Session = Depends(get_
         db.add(db_campaign)
         db.commit()
         db.refresh(db_campaign)
-        
         return db_campaign
     
     except Exception as e:
@@ -77,11 +76,7 @@ def create_campaign(campaign: schemas.CampaignCreate, db: Session = Depends(get_
 
 
 @app.put("/campaigns/{campaign_id}", response_model=schemas.Campaign)
-def update_campaign(
-    campaign_id: int,
-    campaign: schemas.CampaignCreate,
-    db: Session = Depends(get_db)
-):
+def update_campaign(campaign_id: int, campaign: schemas.CampaignCreate, db: Session = Depends(get_db)):
     try:
         db_campaign = db.query(models.Campaign).filter(
             models.Campaign.id == campaign_id
@@ -98,7 +93,6 @@ def update_campaign(
         
         db.commit()
         db.refresh(db_campaign)
-        
         return db_campaign
     
     except HTTPException:
@@ -127,7 +121,6 @@ def delete_campaign(campaign_id: int, db: Session = Depends(get_db)):
         
         db.delete(db_campaign)
         db.commit()
-        
         return {"message": f"Campaign {campaign_id} deleted successfully"}
     
     except HTTPException:
@@ -139,3 +132,4 @@ def delete_campaign(campaign_id: int, db: Session = Depends(get_db)):
             status_code=500,
             detail=f"Error deleting campaign: {str(e)}"
         )
+
